@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+	<title>Jacob Grayson</title>
+	<link rel="stylesheet" type="text/css" href="screen.css" />
+</head>
+
+<body>
+
+<header>
+	<span class="kitten-first">Jacob</span>&nbsp;<span class="kitten-last">Grayson</span>
+</header>
+
+<section id="content">
+	<section id="kitten-display">
+		<ul id="beautiful-kitten">
+			<li><span class="kitten-picture img1"></span></li>
+			<li><span class="kitten-picture img2"></span></li>
+			<li><span class="kitten-picture img6"></span></li>
+				
+			<li><span class="kitten-picture img5 kitten-face"></span></li>
+			<li><span class="kitten-picture img7"></span></li>
+			<li><span class="kitten-picture img3 kitten-face"></span></li>
+	
+			<li>
+				<span class="kitten-picture video">
+					<iframe width="175" height="175" src="http://www.youtube.com/embed/K_fv-xp_VOQ?rel=0" frameborder="0"></iframe>
+				</span>
+			</li>
+			<li><span class="kitten-picture img4 kitten-face"></span></li>
+			<li><span class="kitten-picture img8"></span></li>
+		</ul>
+	</section>
+
+	<section id="meows">
+		<h1>My name is Jacob Grayson</h1>
+		<p>My skill set is here to help you and your company. I have extensive training in diplomatic relations as well as international espionage. These services come together to provide an exquisite consulting experience for your management team.</p>
+	</section>
+</section>
+
+<footer>
+	<span class="kittenright-symbol">&#9400;</span>&nbsp;<span class="kittenright">kittenright</span>&nbsp;<span class="kitten-date">2012</span>
+</footer>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		sequence = [];
+		counter = 0;
+		
+		//set up initial sequence of pictures
+		$.each($(".kitten-picture"), function(key, picture){
+			sequence.push(key);
+		});
+		//shuffle that sequence around
+		sequence.sort(function() { return 0.5 - Math.random() });
+		
+		function animateIt() {
+			if ((sequence.length - 1) === counter) {
+				sequence.sort(function() { return 0.5 - Math.random() });
+				counter = 0;
+			} else {
+				counter++;
+			}
+			
+			$(".kitten-picture:eq(" + sequence[counter] + ")").animate({
+				opacity: .8
+			}, 1500, function(){
+				var opacityAmt = ($(this).hasClass("kitten-face")) ? .4 : .3 ;
+				$(this).animate({ opacity: opacityAmt }, 1500, function(){
+					return animateIt();
+				});
+			});
+		}
+		animateIt();	
+	});
+</script>
+
+</body>
+</html>
